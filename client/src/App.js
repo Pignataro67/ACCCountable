@@ -109,12 +109,12 @@ class App extends Component {
   
           if (lastSession.start_time === ""){
   
-            const sessions = this.state.workSessions.filter(session => session !== lastSession)
+            const historicalSessions = this.state.workSessions.filter(hSession => hSession !== lastSession)
   
             this.setState({
               ...this.state,
               currentSession: lastSession,
-              workSessions: sessions
+              workSessions: historicalSessions
             }, )
   
           } else {
@@ -147,7 +147,7 @@ class App extends Component {
     .then(resp => resp.json())
     .then(tasks => {
       filterCurrentTasks(tasks);
-      getAllTasks(tasks);
+      // getAllTasks(tasks);
     })
 
     const filterCurrentTasks = tasks => {
@@ -162,12 +162,12 @@ class App extends Component {
       })
     }
 
-    const getAllTasks = tasks => {
-      this.setState({
-        ...this.state,
-        allTasks: tasks
-      })
-    }
+    // const getAllTasks = tasks => {
+    //   this.setState({
+    //     ...this.state,
+    //     allTasks: tasks
+    //   })
+    // }
   }
 
   componentDidUpdate() {

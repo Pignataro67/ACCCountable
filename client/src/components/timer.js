@@ -34,7 +34,7 @@ import ReactCountdownClock from "react-countdown-clock";
     }
 
     render() {
-      const minutes = 20;
+      const minutes = 1;
         
       return (
         <div className="timer">
