@@ -14,12 +14,20 @@ class App extends Component {
       allTasks: [],
       workSessions: [],
       currentSession: [],
-      currentTasks: []
+      currentTasks: [],
+      working: false
       }
     }
     
     deleteTask = task => {
       console.log("delete button", task)
+    }
+
+    beginTimer = () => {
+      this.sendTime()
+      this.setState({
+        working: true
+      })
     }
 
     sendTime = () => {
@@ -81,13 +89,13 @@ class App extends Component {
     render() {
       return (
         <div className="App">
-          <UserHomepage appState={this.state} sendTime={this.sendTime} addATask={this.addATask} deleteTask={this.deleteTask}/>
+          <UserHomepage appState={this.state} sendTime={this.sendTime} addATask={this.addATask} deleteTask={this.deleteTask} working={this.state.working}/>
         </div>
       );
     }
 
     componentDidMount() {
-
+      console.log("I updated")
       fetch("http://localhost:3001/work_sessions")
       .then(res => res.json())
       .then(data => filterWorkSessions(data))
@@ -187,6 +195,7 @@ class App extends Component {
 
     const reassignWS = openTasks => {
       openTasks.map(task => {
+        console.log(`%cWork Session ${this.state.currentSession.id} updated`, "color:green;")
         fetch(`http://localhost:3001/tasks/${task.id}`, {
           method: "PATCH",
           headers: {
@@ -196,7 +205,7 @@ class App extends Component {
           body: JSON.stringify({
             work_session_id: this.state.currentSession.id
           })
-        })
+        }).then(resp => resp.json()).then(json => console.log(json))
       })
     }
     getOpenTasks();
