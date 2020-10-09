@@ -1,16 +1,14 @@
 import React from 'react';
-
+// props= tasks, addATask(), deleteTask(), working;
 
 const TaskList = props => {
 
-  const addTasks = () => {
-    return props.tasks.map(task => {
-      return <li key={idx}>
+  const displayTasks = () => {
+    return props.tasks.map((task, idx)
+      => {
 
-      {task.title}
-      <button className="delete-button" name="delete-button" onClick={()=> props.deleteTask(task)}>X</button>
-      <button className="edit-button" name="edit-button">E</button>
-      </li>
+        return props.working ?
+        createCheckedTasks(task, idx) : createEditTasks(task, idx)
     })
   }
 
