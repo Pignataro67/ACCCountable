@@ -21,13 +21,20 @@ const TaskList = props => {
     </li>
   }
 
+  const createCheckedTasks = (task, idx) => {
+    return <li key={idx}>
+    <input type="checkbox" name={task} />
+    {task.title}
+
+    </li>
+
     return (
       <div className="comp">
           <form>
           <input type="text" name="taskInput" />
           <input type="submit" value="Add"/>
         </form>
-        <ul>
+        <ul  className="task-list">
           {addTasks()}
         </ul>
       </div>
