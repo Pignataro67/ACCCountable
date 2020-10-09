@@ -11,6 +11,15 @@ const TaskList = props => {
         createCheckedTasks(task, idx) : createEditTasks(task, idx)
     })
   }
+  
+  const createEditTasks = (task, idx) => {
+    return <li key={idx}>
+    <input type="checkbox" name={task.title} disabled />
+    {task.title}
+    <button className="delete-button" name="delete-button" onClick={()=> props.deleteTask(task)}>X</button>
+    <button className="edit-button" name="edit-button">E</button>
+    </li>
+  }
 
     return (
       <div className="comp">
